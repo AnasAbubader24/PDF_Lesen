@@ -1,0 +1,27 @@
+services:
+  app:
+    build: .
+    image: abubader/pdf_lesen:latest
+    restart: unless-stopped
+    environment:
+      OPPER_API_KEY: ${OPPER_API_KEY:-}
+      OPPER_BASE_URL: ${OPPER_BASE_URL:-https://api.opper.ai/v3/compat}
+      OPPER_MODEL: ${OPPER_MODEL:-anthropic/claude-sonnet-4-5}
+    volumes:
+      - erp-data:/app/data
+      - type: bind
+        source: ${TLS_CERT_PATH:-./certs/localhost+2.pem}
+        target: /app/certs/localhost.pem
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${TLS_KEY_PATH:-./certs/localhost+2-key.pem}
+        target: /app/certs/localhost-key.pem
+        read_only: true
+        bind:
+          create_host_path: false
+    ports:
+      - "127.0.0.1:${HTTPS_PORT:-10443}:10443"
+volumes:
+  erp-data:

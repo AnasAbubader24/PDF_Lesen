@@ -1,0 +1,21 @@
+{
+  "name": "@lieferklar/server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=../.env src/main.js",
+    "start": "node --env-file-if-exists=../.env src/main.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@langchain/core": "^1.1.0",
+    "@langchain/openai": "^1.1.0",
+    "@napi-rs/canvas": "^1.1.1",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "pdfjs-dist": "^6.2.108",
+    "pdfkit": "^0.17.2",
+    "zod": "^4.1.0"
+  }
+}
